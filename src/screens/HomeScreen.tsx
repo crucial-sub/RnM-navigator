@@ -1,14 +1,14 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import HomeHeader from '../components/HomeHeader';
-import CharacterSectionList from '../components/characters/CharacterSectionList';
+import CharacterList from '../components/characters/CharacterList';
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.wrapper}>
         <HomeHeader />
-        <CharacterSectionList />
+        <CharacterList />
       </View>
     </SafeAreaView>
   );
