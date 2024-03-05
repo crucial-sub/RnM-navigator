@@ -1,7 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import HomeScreen from '../screens/HomeScreen';
 import BottomTabsNavigator from './BottomTabsNavigator';
 
 const MainStack = createStackNavigator();
@@ -9,7 +8,7 @@ const MainStack = createStackNavigator();
 const MainStackNavigator = () => {
   return (
     <MainStack.Navigator screenOptions={{headerShown: false}}>
-      <MainStack.Screen name="BottomTabs" component={BottomTabsNavigator} />
+      <MainStack.Screen name="BottomTabsNav" component={BottomTabsNavigator} />
     </MainStack.Navigator>
   );
 };

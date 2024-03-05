@@ -1,18 +1,20 @@
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {
-  ActivityIndicator,
   FlatList,
   Image,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {CharacterType, getCharacters} from '../../api/getCharacters';
+import {useNavigation} from '@react-navigation/native';
 
 const LISTHEADERTITLE = 'Characters';
 
 const CharacterFlatList = () => {
+  const navigation = useNavigation();
   const queryClient = useQueryClient();
   const {
     data: characters,
@@ -28,9 +30,13 @@ const CharacterFlatList = () => {
 
   const [characterList, setCharacterList] = React.useState<CharacterType[]>([]);
 
+  const handlePress = () => {
+    navigation.navigate('CharacterDetail' as never);
+  };
+
   const renderItem = React.useCallback(
     ({item}: {item: CharacterType}) => (
-      <View style={styles.itemWrapper}>
+      <TouchableOpacity style={styles.itemWrapper} onPress={handlePress}>
         <Image source={{uri: item.image}} style={styles.itemImage} />
         <View style={styles.itemInfoWrapper}>
           <Text style={styles.itemName}>{item.name}</Text>
@@ -52,7 +58,7 @@ const CharacterFlatList = () => {
             </Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     ),
     [],
   );
