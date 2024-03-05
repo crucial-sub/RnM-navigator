@@ -2,12 +2,17 @@ import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import MainScreen from './src/screens/MainScreen';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <MainScreen />
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <MainScreen />
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
 
