@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
   },
   itemWrapper: {
     width: '47%',
-    height: 204,
     backgroundColor: '#1D1D1B',
     borderRadius: 12,
     padding: 12,
@@ -118,6 +117,8 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     flex: 1,
+    width: '100%',
+    aspectRatio: 1,
     borderRadius: 12,
   },
   itemInfoWrapper: {

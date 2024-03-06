@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import CharacterDetail from '../components/characters/CharacterDetail';
 import {useQuery} from '@tanstack/react-query';
-import {CharacterType, getCharacter} from '../api/getCharacters';
+import React, {useEffect} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {getCharacter} from '../api/getCharacters';
+import CharacterDetail from '../components/characters/CharacterDetail';
 
 const CharacterDetailScreen = ({route}: any) => {
   const {id} = route.params;

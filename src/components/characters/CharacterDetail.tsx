@@ -1,7 +1,6 @@
-import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
-import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
-import {CharacterType, getCharacter} from '../../api/getCharacters';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {CharacterType} from '../../api/getCharacters';
 
 type PropsType = {
   character: CharacterType;
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   },
   characterImage: {
     width: '100%',
-    height: 398,
+    aspectRatio: 1,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
   },
