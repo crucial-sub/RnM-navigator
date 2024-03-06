@@ -1,14 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {CharacterType} from '../../api/getCharacters';
 import {RootStackParamList} from '../../navigation/MainStackNavigator';
 
@@ -30,7 +24,7 @@ const CharacterFlatList = ({characterList}: PropsType) => {
       <TouchableOpacity
         style={styles.itemWrapper}
         onPress={() => handlePress(item.id)}>
-        <Image source={{uri: item.image}} style={styles.itemImage} />
+        <FastImage source={{uri: item.image}} style={styles.itemImage} />
         <View style={styles.itemInfoWrapper}>
           <Text style={styles.itemName}>{item.name}</Text>
           <View style={styles.itemStatusWrapper}>

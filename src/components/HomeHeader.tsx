@@ -1,5 +1,6 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {ImageAssets} from '../assets/ImageAssets';
 
 const HEADERTITLE = 'Rick and Morty';
@@ -9,12 +10,15 @@ const HomeHeader = () => {
     <View style={styles.headerWrapper}>
       <View style={styles.titleWrapper}>
         <View style={styles.imageWrapper}>
-          <Image source={ImageAssets.rickImage} style={styles.titleImage} />
+          <FastImage source={ImageAssets.rickImage} style={styles.titleImage} />
         </View>
         <Text style={styles.titleText}>{HEADERTITLE}</Text>
       </View>
       <TouchableOpacity>
-        <Image source={ImageAssets.searchImage} style={styles.searchImage} />
+        <FastImage
+          source={ImageAssets.searchImage}
+          style={styles.searchImage}
+        />
       </TouchableOpacity>
     </View>
   );

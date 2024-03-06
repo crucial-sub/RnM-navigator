@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {ImageAssets} from '../../assets/ImageAssets';
 
@@ -12,7 +13,10 @@ const DetailScreenOverlay = () => {
   return (
     <View style={styles.wrapper}>
       <TouchableOpacity onPress={handlePress}>
-        <Image source={ImageAssets.whiteBackImage} style={styles.backImage} />
+        <FastImage
+          source={ImageAssets.whiteBackImage}
+          style={styles.backImage}
+        />
       </TouchableOpacity>
     </View>
   );

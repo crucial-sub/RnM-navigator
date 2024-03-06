@@ -1,6 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {ImageAssets} from '../assets/ImageAssets';
 import EpisodesScreen from '../screens/EpisodesScreen';
 import LocationsScreen from '../screens/LocationsScreen';
@@ -26,7 +27,10 @@ const BottomTabsNavigator = () => {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: () => (
-            <Image source={ImageAssets.homeImage} style={styles.tabBarIcon} />
+            <FastImage
+              source={ImageAssets.homeImage}
+              style={styles.tabBarIcon}
+            />
           ),
         }}
       />
@@ -36,7 +40,7 @@ const BottomTabsNavigator = () => {
         options={{
           tabBarLabel: 'Locations',
           tabBarIcon: () => (
-            <Image
+            <FastImage
               source={ImageAssets.locationImage}
               style={styles.tabBarIcon}
             />
@@ -49,7 +53,7 @@ const BottomTabsNavigator = () => {
         options={{
           tabBarLabel: 'Episodes',
           tabBarIcon: () => (
-            <Image
+            <FastImage
               source={ImageAssets.episodeImage}
               style={styles.tabBarIcon}
             />
@@ -62,7 +66,7 @@ const BottomTabsNavigator = () => {
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: () => (
-            <Image
+            <FastImage
               source={ImageAssets.settingImage}
               style={styles.tabBarIcon}
             />
