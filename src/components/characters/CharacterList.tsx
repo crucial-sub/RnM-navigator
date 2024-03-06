@@ -1,3 +1,5 @@
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {
@@ -8,9 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {CharacterType, getCharacters} from '../../api/getCharacters';
-import {useNavigation} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {CharacterType, getAllCharacters} from '../../api/getCharacters';
 import {RootStackParamList} from '../../navigation/MainStackNavigator';
 
 const LISTHEADERTITLE = 'Characters';
@@ -18,15 +18,9 @@ const LISTHEADERTITLE = 'Characters';
 const CharacterFlatList = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const queryClient = useQueryClient();
-  const {
-    data: characters,
-    isLoading,
-    isError,
-    isSuccess,
-    refetch,
-  } = useQuery({
-    queryKey: ['get-characters'],
-    queryFn: getCharacters,
+  const {data, isLoading, isError, isSuccess, refetch} = useQuery({
+    queryKey: ['get-all-characters'],
+    queryFn: getAllCharacters,
     staleTime: 5 * 60 * 1000,
   });
 
@@ -78,7 +72,7 @@ const CharacterFlatList = () => {
   );
 
   React.useEffect(() => {
-    if (isSuccess) setCharacterList(characters);
+    if (isSuccess) setCharacterList(data);
   }, [isLoading, isError, isSuccess]);
 
   return (

@@ -31,8 +31,14 @@ export interface CharacterType {
   created: string;
 }
 
-export const getCharacters = async (): Promise<CharacterType[]> => {
+export const getAllCharacters = async (): Promise<CharacterType[]> => {
   const {data} = await apiClient.get<CharacterListType>('/character');
 
   return data.results;
+};
+
+export const getCharacter = async (id: number): Promise<CharacterType> => {
+  const {data} = await apiClient.get<CharacterType>(`/character/${id}`);
+
+  return data;
 };
