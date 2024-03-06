@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {CharacterType} from '../../api/getCharacters';
+import DetailScreenOverlay from './DetailScreenOverlay';
 
 type PropsType = {
   character: CharacterType;
@@ -10,6 +11,7 @@ const CharacterDetail = ({character}: PropsType) => {
   return (
     <View style={styles.wrapper}>
       <Image source={{uri: character.image}} style={styles.characterImage} />
+      <DetailScreenOverlay />
       <View style={styles.itemInfoWrapper}>
         <Text style={styles.itemName}>{character.name}</Text>
         <View style={styles.itemStatusWrapper}>
