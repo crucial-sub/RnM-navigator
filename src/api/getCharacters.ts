@@ -34,7 +34,16 @@ export interface CharacterType {
 export const getAllCharacters = async (): Promise<CharacterType[]> => {
   const {data} = await apiClient.get<CharacterListType>('/character');
 
-  return data.results;
+  const arr = [];
+  const maxPage = data.info.pages;
+  for (let i = 1; i <= maxPage; i++) {
+    const {data} = await apiClient.get<CharacterListType>(
+      `/character/?page=${i}`,
+    );
+    arr.push(...data.results);
+  }
+
+  return arr;
 };
 
 export const getCharacter = async (id: number): Promise<CharacterType> => {

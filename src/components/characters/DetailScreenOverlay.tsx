@@ -1,8 +1,8 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {ImageAssets} from '../../assets/ImageAssets';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+import React from 'react';
+import {Image, StyleSheet, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ImageAssets} from '../../assets/ImageAssets';
 
 const DetailScreenOverlay = () => {
   const navigation = useNavigation();

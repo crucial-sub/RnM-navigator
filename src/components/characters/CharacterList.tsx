@@ -1,6 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
 import {
   FlatList,
@@ -10,21 +9,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {CharacterType, getAllCharacters} from '../../api/getCharacters';
+import {CharacterType} from '../../api/getCharacters';
 import {RootStackParamList} from '../../navigation/MainStackNavigator';
 
 const LISTHEADERTITLE = 'Characters';
 
-const CharacterFlatList = () => {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-  const queryClient = useQueryClient();
-  const {data, isLoading, isError, isSuccess, refetch} = useQuery({
-    queryKey: ['get-all-characters'],
-    queryFn: getAllCharacters,
-    staleTime: 5 * 60 * 1000,
-  });
+type PropsType = {
+  characterList: CharacterType[];
+};
 
-  const [characterList, setCharacterList] = React.useState<CharacterType[]>([]);
+const CharacterFlatList = ({characterList}: PropsType) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handlePress = (id: number) => {
     navigation.navigate('CharacterDetail', {id: id});
@@ -70,10 +65,6 @@ const CharacterFlatList = () => {
     () => <Text style={styles.listHeaderText}>{LISTHEADERTITLE}</Text>,
     [],
   );
-
-  React.useEffect(() => {
-    if (isSuccess) setCharacterList(data);
-  }, [isLoading, isError, isSuccess]);
 
   return (
     <FlatList
