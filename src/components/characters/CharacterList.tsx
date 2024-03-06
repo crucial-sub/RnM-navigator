@@ -78,6 +78,9 @@ const CharacterFlatList = ({characterList}: PropsType) => {
       ListHeaderComponent={listHeader}
       ListHeaderComponentStyle={styles.listHeader}
       stickyHeaderIndices={[0]}
+      initialNumToRender={8}
+      windowSize={5}
+      maxToRenderPerBatch={6}
     />
   );
 };
