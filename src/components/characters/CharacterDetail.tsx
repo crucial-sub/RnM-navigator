@@ -1,38 +1,25 @@
 import {useQuery, useQueryClient} from '@tanstack/react-query';
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
 import {CharacterType, getCharacter} from '../../api/getCharacters';
 
 type PropsType = {
-  id: number;
+  character: CharacterType;
 };
 
-const CharacterDetail = ({id}: PropsType) => {
-  const queryClient = useQueryClient();
-  const {data, isLoading, isError, isSuccess, refetch} = useQuery({
-    queryKey: ['get-character'],
-    queryFn: () => getCharacter(id),
-    staleTime: 5 * 60 * 1000,
-  });
-
-  const [character, setCharacter] = React.useState<CharacterType>();
-
-  React.useEffect(() => {
-    if (isSuccess) setCharacter(data);
-  }, [isLoading, isError, isSuccess]);
-
+const CharacterDetail = ({character}: PropsType) => {
   return (
     <View style={styles.wrapper}>
-      <Image source={{uri: character?.image}} style={styles.characterImage} />
+      <Image source={{uri: character.image}} style={styles.characterImage} />
       <View style={styles.itemInfoWrapper}>
-        <Text style={styles.itemName}>{character?.name}</Text>
+        <Text style={styles.itemName}>{character.name}</Text>
         <View style={styles.itemStatusWrapper}>
           <View
             style={[
               styles.itemStatus,
               {
                 backgroundColor:
-                  character?.status === 'Alive'
+                  character.status === 'Alive'
                     ? '#8CD790'
                     : character?.status === 'Dead'
                     ? 'red'
@@ -40,11 +27,11 @@ const CharacterDetail = ({id}: PropsType) => {
               },
             ]}></View>
           <Text style={styles.itemStatusText}>
-            {character?.status} - {character?.species}
+            {character.status} - {character.species}
           </Text>
         </View>
-        <Text style={styles.itemEtc}>Gender: {character?.gender}</Text>
-        <Text style={styles.itemEtc}>Location: {character?.location.name}</Text>
+        <Text style={styles.itemEtc}>Gender: {character.gender}</Text>
+        <Text style={styles.itemEtc}>Location: {character.location.name}</Text>
       </View>
     </View>
   );
