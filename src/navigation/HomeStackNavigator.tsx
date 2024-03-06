@@ -12,7 +12,6 @@ const HomeStackNavigator = () => {
       <HomeStack.Screen
         name="CharacterDetail"
         component={CharacterDetailScreen}
-        // initialParams={{params: {id: 11111}}}
       />
     </HomeStack.Navigator>
   );
