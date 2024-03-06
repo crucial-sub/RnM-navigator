@@ -12,7 +12,11 @@ const BottomTabsNavigator = () => {
     <BottomTab.Navigator
       screenOptions={{headerShown: false}}
       initialRouteName="Home">
-      <BottomTab.Screen name="HomeStackNav" component={HomeStackNavigator} />
+      <BottomTab.Screen
+        name="HomeStackNav"
+        component={HomeStackNavigator}
+        options={{tabBarLabel: 'Home'}}
+      />
       <BottomTab.Screen name="Locations" component={LocationsScreen} />
       <BottomTab.Screen name="Episodes" component={EpisodesScreen} />
       <BottomTab.Screen name="Settings" component={SettingsScreen} />
