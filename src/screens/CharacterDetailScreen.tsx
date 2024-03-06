@@ -1,12 +1,11 @@
 import {useQuery} from '@tanstack/react-query';
 import React, {useEffect} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {ActivityIndicator, SafeAreaView, StyleSheet} from 'react-native';
 import {getCharacter} from '../api/getCharacters';
 import CharacterDetail from '../components/characters/CharacterDetail';
 
 const CharacterDetailScreen = ({route}: any) => {
   const {id} = route.params;
-
   const {data, isLoading, isError, isSuccess, refetch} = useQuery({
     queryKey: ['get-character'],
     queryFn: () => getCharacter(id),
@@ -19,7 +18,18 @@ const CharacterDetailScreen = ({route}: any) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      {data && <CharacterDetail character={data} />}
+      {id !== data?.id && (
+        <ActivityIndicator
+          size={'large'}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#0A0A0A',
+          }}
+        />
+      )}
+      {id === data?.id && <CharacterDetail character={data!} />}
     </SafeAreaView>
   );
 };

@@ -17,9 +17,6 @@ const HomeScreen = () => {
     if (isSuccess) setCharacterList(data);
   }, [isLoading, isError, isSuccess]);
 
-  React.useEffect(() => {
-    refetch();
-  }, [refetch]);
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.wrapper}>
