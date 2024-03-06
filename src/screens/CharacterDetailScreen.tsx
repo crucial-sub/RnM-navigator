@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
-const CharacterDetailScreen = () => {
+const CharacterDetailScreen = ({route}: any) => {
+  const {id} = route.params;
   return (
     <View>
-      <Text>CharacterDetailScreen</Text>
+      <Text></Text>
     </View>
   );
 };

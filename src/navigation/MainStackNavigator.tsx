@@ -5,6 +5,10 @@ import BottomTabsNavigator from './BottomTabsNavigator';
 
 const MainStack = createStackNavigator();
 
+export type RootStackParamList = {
+  CharacterDetail: {id: number} | undefined;
+};
+
 const MainStackNavigator = () => {
   return (
     <MainStack.Navigator screenOptions={{headerShown: false}}>
