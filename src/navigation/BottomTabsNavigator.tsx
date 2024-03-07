@@ -17,7 +17,7 @@ const BottomTabsNavigator = () => {
     <BottomTab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#FFFFFF',
+        tabBarActiveTintColor: '#C1C1C1',
         tabBarInactiveTintColor: '#C1C1C1C1',
         tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabBarLaber,
@@ -28,7 +28,9 @@ const BottomTabsNavigator = () => {
         component={HomeStackNavigator}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: () => <HomeIcon />,
+          tabBarIcon: ({focused}) => (
+            <HomeIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -36,7 +38,9 @@ const BottomTabsNavigator = () => {
         component={LocationsScreen}
         options={{
           tabBarLabel: 'Locations',
-          tabBarIcon: () => <LocationIcon />,
+          tabBarIcon: ({focused}) => (
+            <LocationIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -44,7 +48,9 @@ const BottomTabsNavigator = () => {
         component={EpisodesScreen}
         options={{
           tabBarLabel: 'Episodes',
-          tabBarIcon: () => <EpisodeIcon />,
+          tabBarIcon: ({focused}) => (
+            <EpisodeIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
+          ),
         }}
       />
       <BottomTab.Screen
@@ -52,7 +58,9 @@ const BottomTabsNavigator = () => {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Settings',
-          tabBarIcon: () => <SettingIcon />,
+          tabBarIcon: ({focused}) => (
+            <SettingIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
+          ),
         }}
       />
     </BottomTab.Navigator>
