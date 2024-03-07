@@ -1,7 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-import {ImageAssets} from '../assets/ImageAssets';
+import {StyleSheet} from 'react-native';
+import EpisodeIcon from '../assets/images/episode.svg';
+import HomeIcon from '../assets/images/home.svg';
+import LocationIcon from '../assets/images/location.svg';
+import SettingIcon from '../assets/images/setting.svg';
 import EpisodesScreen from '../screens/EpisodesScreen';
 import LocationsScreen from '../screens/LocationsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -25,9 +28,7 @@ const BottomTabsNavigator = () => {
         component={HomeStackNavigator}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: () => (
-            <Image source={ImageAssets.homeImage} style={styles.tabBarIcon} />
-          ),
+          tabBarIcon: () => <HomeIcon />,
         }}
       />
       <BottomTab.Screen
@@ -35,12 +36,7 @@ const BottomTabsNavigator = () => {
         component={LocationsScreen}
         options={{
           tabBarLabel: 'Locations',
-          tabBarIcon: () => (
-            <Image
-              source={ImageAssets.locationImage}
-              style={styles.tabBarIcon}
-            />
-          ),
+          tabBarIcon: () => <LocationIcon />,
         }}
       />
       <BottomTab.Screen
@@ -48,12 +44,7 @@ const BottomTabsNavigator = () => {
         component={EpisodesScreen}
         options={{
           tabBarLabel: 'Episodes',
-          tabBarIcon: () => (
-            <Image
-              source={ImageAssets.episodeImage}
-              style={styles.tabBarIcon}
-            />
-          ),
+          tabBarIcon: () => <EpisodeIcon />,
         }}
       />
       <BottomTab.Screen
@@ -61,12 +52,7 @@ const BottomTabsNavigator = () => {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Settings',
-          tabBarIcon: () => (
-            <Image
-              source={ImageAssets.settingImage}
-              style={styles.tabBarIcon}
-            />
-          ),
+          tabBarIcon: () => <SettingIcon />,
         }}
       />
     </BottomTab.Navigator>
