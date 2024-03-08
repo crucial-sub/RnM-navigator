@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   itemImage: {
     flex: 1,
-    width: '100%',
+    maxWidth: '100%',
     aspectRatio: 1,
     borderRadius: 12,
   },
