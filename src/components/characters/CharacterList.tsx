@@ -18,6 +18,14 @@ const CharacterFlatList = ({characterList}: PropsType) => {
   const handlePress = (id: number) => {
     navigation.navigate('CharacterDetail', {id: id});
   };
+  const handleItemStatus = (item: CharacterType) => ({
+    backgroundColor:
+      item.status === 'Alive'
+        ? '#8CD790'
+        : item.status === 'Dead'
+        ? 'red'
+        : '#dfa316',
+  });
 
   const renderItem = React.useCallback(
     ({item}: {item: CharacterType}) => (
@@ -28,18 +36,7 @@ const CharacterFlatList = ({characterList}: PropsType) => {
         <View style={styles.itemInfoWrapper}>
           <Text style={styles.itemName}>{item.name}</Text>
           <View style={styles.itemStatusWrapper}>
-            <View
-              style={[
-                styles.itemStatus,
-                {
-                  backgroundColor:
-                    item.status === 'Alive'
-                      ? '#8CD790'
-                      : item.status === 'Dead'
-                      ? 'red'
-                      : '#dfa316',
-                },
-              ]}></View>
+            <View style={[styles.itemStatus, handleItemStatus(item)]}></View>
             <Text style={styles.itemStatusText}>
               {item.status} - {item.species}
             </Text>
