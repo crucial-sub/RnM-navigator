@@ -36,7 +36,7 @@ const CharacterFlatList = ({characterList}: PropsType) => {
         <View style={styles.itemInfoWrapper}>
           <Text style={styles.itemName}>{item.name}</Text>
           <View style={styles.itemStatusWrapper}>
-            <View style={[styles.itemStatus, handleItemStatus(item)]}></View>
+            <View style={[styles.itemStatus, handleItemStatus(item)]} />
             <Text style={styles.itemStatusText}>
               {item.status} - {item.species}
             </Text>
