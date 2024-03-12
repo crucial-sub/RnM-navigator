@@ -1,7 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
-import {ImageAssets} from '../assets/ImageAssets';
+import {StyleSheet} from 'react-native';
+import EpisodeIcon from '../assets/images/episode.svg';
+import HomeIcon from '../assets/images/home.svg';
+import LocationIcon from '../assets/images/location.svg';
+import SettingIcon from '../assets/images/setting.svg';
 import EpisodesScreen from '../screens/EpisodesScreen';
 import LocationsScreen from '../screens/LocationsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -14,7 +17,7 @@ const BottomTabsNavigator = () => {
     <BottomTab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#FFFFFF',
+        tabBarActiveTintColor: '#C1C1C1',
         tabBarInactiveTintColor: '#C1C1C1C1',
         tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabBarLaber,
@@ -25,8 +28,8 @@ const BottomTabsNavigator = () => {
         component={HomeStackNavigator}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: () => (
-            <Image source={ImageAssets.homeImage} style={styles.tabBarIcon} />
+          tabBarIcon: ({focused}) => (
+            <HomeIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
           ),
         }}
       />
@@ -35,11 +38,8 @@ const BottomTabsNavigator = () => {
         component={LocationsScreen}
         options={{
           tabBarLabel: 'Locations',
-          tabBarIcon: () => (
-            <Image
-              source={ImageAssets.locationImage}
-              style={styles.tabBarIcon}
-            />
+          tabBarIcon: ({focused}) => (
+            <LocationIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
           ),
         }}
       />
@@ -48,11 +48,8 @@ const BottomTabsNavigator = () => {
         component={EpisodesScreen}
         options={{
           tabBarLabel: 'Episodes',
-          tabBarIcon: () => (
-            <Image
-              source={ImageAssets.episodeImage}
-              style={styles.tabBarIcon}
-            />
+          tabBarIcon: ({focused}) => (
+            <EpisodeIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
           ),
         }}
       />
@@ -61,11 +58,8 @@ const BottomTabsNavigator = () => {
         component={SettingsScreen}
         options={{
           tabBarLabel: 'Settings',
-          tabBarIcon: () => (
-            <Image
-              source={ImageAssets.settingImage}
-              style={styles.tabBarIcon}
-            />
+          tabBarIcon: ({focused}) => (
+            <SettingIcon stroke={focused ? '#C1C1C1' : '#C1C1C1C1'} />
           ),
         }}
       />
