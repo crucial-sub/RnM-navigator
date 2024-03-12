@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Switch, View} from 'react-native';
 import Animated, {
-  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -16,16 +15,15 @@ const VerticalMoveMorty = () => {
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const handleSwitch = () => {
     setIsSwitchOn(prev => !prev);
-    positionValue.value = withTiming(isSwitchOn ? 0 : 1, {
+    positionValue.value = withTiming(isSwitchOn ? 0 : 100, {
       duration: 1000,
     });
   };
   const verticalMoveAnimatedStyle = useAnimatedStyle(() => {
-    const position = interpolate(positionValue.value, [0, 1], [0, 100]);
     return {
-      top: `${position}%`,
+      top: `${positionValue.value}%`,
       transform: [
-        {translateY: (-IMAGESIZE * position) / 100},
+        {translateY: (-IMAGESIZE * positionValue.value) / 100},
         {translateX: -IMAGESIZE / 2},
       ],
     };

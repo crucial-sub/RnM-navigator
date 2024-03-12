@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Switch, View} from 'react-native';
 import Animated, {
-  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -16,15 +15,14 @@ const HorizontalMoveRick = () => {
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const handleSwitch = () => {
     setIsSwitchOn(prev => !prev);
-    positionValue.value = withTiming(isSwitchOn ? 0 : 1, {
+    positionValue.value = withTiming(isSwitchOn ? 0 : 100, {
       duration: 1000,
     });
   };
   const horizontalMoveAnimatedStyle = useAnimatedStyle(() => {
-    const position = interpolate(positionValue.value, [0, 1], [0, 100]);
     return {
-      left: `${position}%`,
-      transform: [{translateX: (-IMAGESIZE * position) / 100}],
+      left: `${positionValue.value}%`,
+      transform: [{translateX: (-IMAGESIZE * positionValue.value) / 100}],
     };
   });
   return (

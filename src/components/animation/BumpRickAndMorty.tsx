@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Switch, View} from 'react-native';
 import Animated, {
-  interpolate,
+  Easing,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -17,23 +17,24 @@ const BumpRickAndMorty = () => {
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
   const handleSwitch = () => {
     setIsSwitchOn(prev => !prev);
-    positionValue.value = withTiming(isSwitchOn ? 0 : 1, {
+    positionValue.value = withTiming(isSwitchOn ? 0 : 50, {
       duration: 1000,
+      easing: Easing.bounce,
     });
   };
-  const bumpAnimatedStyle = (direction: string) =>
-    useAnimatedStyle(() => {
-      const position = interpolate(positionValue.value, [0, 1], [0, 50]);
-      return direction === 'left'
-        ? {
-            left: `${position}%`,
-            transform: [{translateX: (-IMAGESIZE * 2 * position) / 100}],
-          }
-        : {
-            right: `${position}%`,
-            transform: [{translateX: (IMAGESIZE * 2 * position) / 100}],
-          };
-    });
+  const leftPositionStyle = useAnimatedStyle(() => {
+    return {
+      left: `${positionValue.value}%`,
+      transform: [{translateX: (-IMAGESIZE * 2 * positionValue.value) / 100}],
+    };
+  });
+  const rightPositionStyle = useAnimatedStyle(() => {
+    return {
+      right: `${positionValue.value}%`,
+      transform: [{translateX: (IMAGESIZE * 2 * positionValue.value) / 100}],
+    };
+  });
+
   return (
     <View style={styles.itemWrapper}>
       <View style={styles.controlBoxWrapper}>
@@ -46,11 +47,10 @@ const BumpRickAndMorty = () => {
         />
       </View>
       <View style={styles.rowBorderBox}>
-        <Animated.View style={[styles.rickImageBox, bumpAnimatedStyle('left')]}>
+        <Animated.View style={[styles.rickImageBox, leftPositionStyle]}>
           <RickImage width={50} height={50} />
         </Animated.View>
-        <Animated.View
-          style={[styles.mortyImageBox, bumpAnimatedStyle('right')]}>
+        <Animated.View style={[styles.mortyImageBox, rightPositionStyle]}>
           <MortyImage width={50} height={50} />
         </Animated.View>
       </View>
