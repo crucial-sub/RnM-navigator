@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -8,30 +7,49 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Animated, {
+import {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import RickIcon from '../assets/images/rick.svg';
+import MortyImage from '../assets/images/morty.svg';
+import RickImage from '../assets/images/rick.svg';
 
 const DEFAULT_LEFT_VALUE = 0;
+const DEFAULT_DEGREE = '0';
 
 const LocationsScreen = () => {
+  // move Rick
   const leftValue = useSharedValue<number>(DEFAULT_LEFT_VALUE);
-  const [rickValue, setRickValue] = React.useState('0');
-  const handleValue = (num: string) => {
-    setRickValue(num);
+  const [rickMoveValue, setRickMoveValue] = React.useState('0');
+  const handleMoveValue = (num: string) => {
+    setRickMoveValue(num);
   };
-
   const moveAnimatedStyle = useAnimatedStyle(() => {
     return {
       left: leftValue.value,
     };
   });
+  const moveRick = (num: string) => {
+    leftValue.value = withTiming(isNaN(Number(num)) ? 0 : parseInt(num));
+    setRickMoveValue('0');
+  };
 
-  const moveRick = (value: string) => {
-    leftValue.value = withTiming(parseInt(value));
+  // rotate Morty
+  const degree = useSharedValue<string>(DEFAULT_DEGREE);
+  const [mortyRotateValue, setMortyRotateValue] = React.useState('0');
+  const handleRotateValue = (degree: string) => {
+    setMortyRotateValue(degree);
+  };
+  const rotateAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{rotate: `${degree.value}deg`}],
+    };
+  });
+
+  const rotateMorty = (deg: string) => {
+    degree.value = withTiming(isNaN(Number(deg)) ? '0' : deg, {duration: 1500});
+    setMortyRotateValue('0');
   };
 
   return (
@@ -40,24 +58,42 @@ const LocationsScreen = () => {
         <View>
           <Text style={styles.header}>Learn Animation</Text>
         </View>
-        <View style={styles.rickWrapper}>
+        <View style={styles.itemWrapper}>
           <View style={styles.controlBoxWrapper}>
             <TextInput
               style={styles.textInput}
-              onChangeText={handleValue}
-              value={rickValue}></TextInput>
+              onChangeText={handleMoveValue}
+              value={rickMoveValue}
+              placeholder="0"
+              placeholderTextColor={'#000000'}
+            />
             <TouchableOpacity
-              style={styles.button}
-              onPress={() => moveRick(rickValue)}>
+              style={styles.moveButton}
+              onPress={() => moveRick(rickMoveValue)}>
               <Text>Move</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.rickBox}>
-            <RickIcon />
-            {/* <Animated.Image
-              source={}
-              style={[styles.rickImage, moveAnimatedStyle]}
-            /> */}
+          <View style={styles.borderBox}>
+            <RickImage />
+          </View>
+        </View>
+        <View style={styles.itemWrapper}>
+          <View style={styles.controlBoxWrapper}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={handleRotateValue}
+              value={mortyRotateValue}
+              placeholder="0"
+              placeholderTextColor={'#000000'}
+            />
+            <TouchableOpacity
+              style={styles.rotateButton}
+              onPress={() => rotateMorty(mortyRotateValue)}>
+              <Text>Rotate</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <MortyImage />
           </View>
         </View>
       </View>
@@ -83,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '700',
   },
-  rickWrapper: {gap: 10},
+  itemWrapper: {gap: 10},
   controlBoxWrapper: {
     flexDirection: 'row',
     gap: 10,
@@ -96,8 +132,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  button: {
+  moveButton: {
     backgroundColor: '#8CD790',
+    borderRadius: 4,
+    width: 64,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rotateButton: {
+    backgroundColor: '#85BFE9',
     borderRadius: 4,
     width: 64,
     height: 30,
@@ -108,7 +152,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 12,
   },
-  rickBox: {
+  borderBox: {
     height: 80,
     borderRadius: 14,
     borderColor: '#FFFFFF',
@@ -118,5 +162,10 @@ const styles = StyleSheet.create({
   rickImage: {
     width: 64,
     height: 64,
+  },
+  mortyImage: {
+    width: 50,
+    height: 50,
+    transform: [{rotate: `0deg`}],
   },
 });
