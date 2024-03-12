@@ -6,11 +6,15 @@ import FastImage from 'react-native-fast-image';
 import {CharacterType} from '../../api/getCharacters';
 import {RootStackParamList} from '../../navigation/MainStackNavigator';
 
-const LISTHEADERTITLE = 'Characters';
-
 type PropsType = {
   characterList: CharacterType[];
 };
+
+const LISTHEADERTITLE = 'Characters';
+
+const ListHeader = () => (
+  <Text style={styles.listHeaderText}>{LISTHEADERTITLE}</Text>
+);
 
 const CharacterFlatList = ({characterList}: PropsType) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -52,11 +56,6 @@ const CharacterFlatList = ({characterList}: PropsType) => {
     [],
   );
 
-  const listHeader = React.useCallback(
-    () => <Text style={styles.listHeaderText}>{LISTHEADERTITLE}</Text>,
-    [],
-  );
-
   return (
     <FlatList
       data={characterList}
@@ -66,7 +65,7 @@ const CharacterFlatList = ({characterList}: PropsType) => {
       horizontal={false}
       columnWrapperStyle={styles.columnWrapper}
       showsVerticalScrollIndicator={false}
-      ListHeaderComponent={listHeader}
+      ListHeaderComponent={ListHeader}
       ListHeaderComponentStyle={styles.listHeader}
       stickyHeaderIndices={[0]}
       initialNumToRender={8}
