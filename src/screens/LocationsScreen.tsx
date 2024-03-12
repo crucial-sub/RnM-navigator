@@ -1,8 +1,9 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import BumpRickAndMorty from '../components/animation/BumpRickAndMorty';
+import HorizontalMoveRick from '../components/animation/HorizontalMoveRick';
 import MoveRick from '../components/animation/MoveRick';
 import RotateMorty from '../components/animation/RotateMorty';
-import BumpRickAndMorty from '../components/animation/BumpRickAndMorty';
 
 const LocationsScreen = () => {
   return (
@@ -14,6 +15,7 @@ const LocationsScreen = () => {
         <MoveRick />
         <RotateMorty />
         <BumpRickAndMorty />
+        <HorizontalMoveRick />
       </View>
     </SafeAreaView>
   );
