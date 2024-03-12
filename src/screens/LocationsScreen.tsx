@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {
+import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -74,7 +74,9 @@ const LocationsScreen = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.borderBox}>
-            <RickImage />
+            <Animated.View style={[styles.imageBox, moveAnimatedStyle]}>
+              <RickImage width={50} height={50} />
+            </Animated.View>
           </View>
         </View>
         <View style={styles.itemWrapper}>
@@ -93,7 +95,9 @@ const LocationsScreen = () => {
             </TouchableOpacity>
           </View>
           <View>
-            <MortyImage />
+            <Animated.View style={[styles.imageBox, rotateAnimatedStyle]}>
+              <MortyImage width={50} height={50} />
+            </Animated.View>
           </View>
         </View>
       </View>
@@ -159,13 +163,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     justifyContent: 'center',
   },
-  rickImage: {
+  imageBox: {
     width: 64,
     height: 64,
-  },
-  mortyImage: {
-    width: 50,
-    height: 50,
-    transform: [{rotate: `0deg`}],
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
