@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {CharacterType} from '../../api/getCharacters';
 import DetailScreenOverlay from './DetailScreenOverlay';
+import CharacterStatus from './CharacterStatus';
 
 type PropsType = {
   character: CharacterType;
@@ -18,25 +19,19 @@ const CharacterDetail = ({character}: PropsType) => {
       <DetailScreenOverlay />
       <View style={styles.itemInfoWrapper}>
         <Text style={styles.itemName}>{character.name}</Text>
-        <View style={styles.itemStatusWrapper}>
-          <View
-            style={[
-              styles.itemStatus,
-              {
-                backgroundColor:
-                  character.status === 'Alive'
-                    ? '#8CD790'
-                    : character?.status === 'Dead'
-                    ? 'red'
-                    : '#dfa316',
-              },
-            ]}></View>
-          <Text style={styles.itemStatusText}>
-            {character.status} - {character.species}
+        <CharacterStatus
+          status={character.status}
+          species={character.species}
+          wrapperStyle={styles.itemStatusWrapper}
+          textStyle={styles.itemStatusText}
+        />
+        <View style={styles.itemEtcWrapper}>
+          <Text
+            style={styles.itemEtcText}>{`Gender: ${character.gender}`}</Text>
+          <Text style={styles.itemEtcText}>
+            {`Location: ${character.location.name}`}
           </Text>
         </View>
-        <Text style={styles.itemEtc}>Gender: {character.gender}</Text>
-        <Text style={styles.itemEtc}>Location: {character.location.name}</Text>
       </View>
     </View>
   );
@@ -68,21 +63,18 @@ const styles = StyleSheet.create({
   itemStatusWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
-    marginBottom: 30,
-  },
-  itemStatus: {
-    width: 5,
-    height: 5,
-    borderRadius: 100,
-    backgroundColor: '#8CD790',
+    gap: 5,
   },
   itemStatusText: {
     fontWeight: '700',
     fontSize: 12,
     color: '#FFFFFF',
   },
-  itemEtc: {
+  itemEtcWrapper: {
+    marginTop: 20,
+    gap: 10,
+  },
+  itemEtcText: {
     color: '#FFFFFF',
     fontWeight: '700',
   },

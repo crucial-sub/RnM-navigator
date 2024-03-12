@@ -5,6 +5,7 @@ import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {CharacterType} from '../../api/getCharacters';
 import {RootStackParamList} from '../../navigation/MainStackNavigator';
+import CharacterStatus from './CharacterStatus';
 
 type PropsType = {
   characterList: CharacterType[];
@@ -22,14 +23,6 @@ const CharacterFlatList = ({characterList}: PropsType) => {
   const handlePress = (id: number) => {
     navigation.navigate('CharacterDetail', {id: id});
   };
-  const handleItemStatus = (item: CharacterType) => ({
-    backgroundColor:
-      item.status === 'Alive'
-        ? '#8CD790'
-        : item.status === 'Dead'
-        ? 'red'
-        : '#dfa316',
-  });
 
   const renderItem = React.useCallback(
     ({item}: {item: CharacterType}) => (
@@ -39,12 +32,12 @@ const CharacterFlatList = ({characterList}: PropsType) => {
         <FastImage source={{uri: item.image}} style={styles.itemImage} />
         <View style={styles.itemInfoWrapper}>
           <Text style={styles.itemName}>{item.name}</Text>
-          <View style={styles.itemStatusWrapper}>
-            <View style={[styles.itemStatus, handleItemStatus(item)]} />
-            <Text style={styles.itemStatusText}>
-              {`${item.status} - ${item.species}`}
-            </Text>
-          </View>
+          <CharacterStatus
+            status={item.status}
+            species={item.species}
+            wrapperStyle={styles.itemStatusWrapper}
+            textStyle={styles.itemStatusText}
+          />
         </View>
       </TouchableOpacity>
     ),
@@ -116,12 +109,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-  },
-  itemStatus: {
-    width: 5,
-    height: 5,
-    borderRadius: 100,
-    backgroundColor: '#8CD790',
   },
   itemStatusText: {
     fontWeight: '700',
