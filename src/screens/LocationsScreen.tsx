@@ -1,14 +1,17 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import BumpRickAndMorty from '../components/animation/BumpRickAndMorty';
 import HorizontalMoveRick from '../components/animation/HorizontalMoveRick';
 import MoveRick from '../components/animation/MoveRick';
 import RotateMorty from '../components/animation/RotateMorty';
+import VerticalMoveMorty from '../components/animation/VerticalMoveMorty';
 
 const LocationsScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <View style={styles.wrapper}>
+      <ScrollView
+        style={styles.wrapper}
+        contentContainerStyle={styles.contentContainer}>
         <View>
           <Text style={styles.header}>Learn Animation</Text>
         </View>
@@ -16,7 +19,8 @@ const LocationsScreen = () => {
         <RotateMorty />
         <BumpRickAndMorty />
         <HorizontalMoveRick />
-      </View>
+        <VerticalMoveMorty />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -32,8 +36,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     paddingHorizontal: 15,
-    gap: 40,
   },
+  contentContainer: {gap: 40},
   header: {
     color: '#FFFFFF',
     fontSize: 24,
