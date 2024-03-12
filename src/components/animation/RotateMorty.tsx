@@ -45,7 +45,7 @@ const RotateMorty = () => {
         <TouchableOpacity
           style={styles.rotateButton}
           onPress={() => rotateMorty(mortyRotateValue)}>
-          <Text>Rotate</Text>
+          <Text style={styles.buttonText}>Rotate</Text>
         </TouchableOpacity>
       </View>
       <View>
