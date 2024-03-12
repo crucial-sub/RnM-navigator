@@ -27,7 +27,7 @@ const CharacterStatus = ({
   );
 };
 
-export default CharacterStatus;
+export default React.memo(CharacterStatus);
 
 const styles = StyleSheet.create({
   itemStatus: {
