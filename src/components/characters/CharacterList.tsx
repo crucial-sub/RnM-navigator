@@ -1,22 +1,21 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {CharacterType} from '../../api/getCharacters';
 import {RootStackParamList} from '../../navigation/MainStackNavigator';
-
-const LISTHEADERTITLE = 'Characters';
+import CharacterStatus from './CharacterStatus';
 
 type PropsType = {
   characterList: CharacterType[];
 };
+
+const LISTHEADERTITLE = 'Characters';
+
+const ListHeader = () => (
+  <Text style={styles.listHeaderText}>{LISTHEADERTITLE}</Text>
+);
 
 const CharacterFlatList = ({characterList}: PropsType) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -30,26 +29,15 @@ const CharacterFlatList = ({characterList}: PropsType) => {
       <TouchableOpacity
         style={styles.itemWrapper}
         onPress={() => handlePress(item.id)}>
-        <Image source={{uri: item.image}} style={styles.itemImage} />
+        <FastImage source={{uri: item.image}} style={styles.itemImage} />
         <View style={styles.itemInfoWrapper}>
           <Text style={styles.itemName}>{item.name}</Text>
-          <View style={styles.itemStatusWrapper}>
-            <View
-              style={[
-                styles.itemStatus,
-                {
-                  backgroundColor:
-                    item.status === 'Alive'
-                      ? '#8CD790'
-                      : item.status === 'Dead'
-                      ? 'red'
-                      : '#dfa316',
-                },
-              ]}></View>
-            <Text style={styles.itemStatusText}>
-              {item.status} - {item.species}
-            </Text>
-          </View>
+          <CharacterStatus
+            status={item.status}
+            species={item.species}
+            wrapperStyle={styles.itemStatusWrapper}
+            textStyle={styles.itemStatusText}
+          />
         </View>
       </TouchableOpacity>
     ),
@@ -58,11 +46,6 @@ const CharacterFlatList = ({characterList}: PropsType) => {
 
   const keyExtractor = React.useCallback(
     (item: CharacterType) => `character-id-${item.id}`,
-    [],
-  );
-
-  const listHeader = React.useCallback(
-    () => <Text style={styles.listHeaderText}>{LISTHEADERTITLE}</Text>,
     [],
   );
 
@@ -75,7 +58,7 @@ const CharacterFlatList = ({characterList}: PropsType) => {
       horizontal={false}
       columnWrapperStyle={styles.columnWrapper}
       showsVerticalScrollIndicator={false}
-      ListHeaderComponent={listHeader}
+      ListHeaderComponent={ListHeader}
       ListHeaderComponentStyle={styles.listHeader}
       stickyHeaderIndices={[0]}
       initialNumToRender={8}
@@ -126,12 +109,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-  },
-  itemStatus: {
-    width: 5,
-    height: 5,
-    borderRadius: 100,
-    backgroundColor: '#8CD790',
   },
   itemStatusText: {
     fontWeight: '700',
